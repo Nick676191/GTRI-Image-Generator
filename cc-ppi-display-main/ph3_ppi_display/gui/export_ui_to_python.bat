@@ -1,0 +1,1 @@
+pyuic5 -o ppi_gui.py ppi_gui.ui

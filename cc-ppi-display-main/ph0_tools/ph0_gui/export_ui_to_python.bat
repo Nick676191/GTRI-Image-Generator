@@ -1,0 +1,1 @@
+pyuic5 -o plotter.py plotter.ui

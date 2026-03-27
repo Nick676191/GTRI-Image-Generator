@@ -1,0 +1,59 @@
+{
+    "classification": "unclassified",
+    "scenario_name": "testing",
+    "log_level": "INFO",
+    "files": {
+        "radar_iq": "example-data/s1_pulsed_with_fm.xdat",
+        "jammer_iq": "example-data/s1_pulsed_with_fm.xdat",
+        "block_size_samples": 1000000,
+        "blocks_to_read": 0,
+        "block_delay": 0,
+		"block_offset": 0,
+        "antenna_file": "antenna_patterns/generic-40db.csv",
+        "output_folder": "output",
+        "output_returns": "returns.csv"
+    },
+    "ph1_settings": {
+        "actions": {
+            "bandpassfilter": false,
+			"windowfilter": false,
+            "range_loss": true,
+            "range_delay": true,
+            "antenna_effects": true,
+            "skin_return": true,
+            "signal_plotting": true
+        },
+        "pulse_detection": {
+            "trigger_level_dBm": -30.0
+        },
+        "radar": {
+            "antenna_azimuth_calibration_offset": 0,
+            "antenna_az_block_size_deg": 3,
+            "az_stare_time_us": 2000,
+            "min_dwell_length_us": 950,
+            "max_dwell_length_us": 1050
+        },
+        "scenario": {
+            "jammer_calibration_power_offset": 0,
+            "jammer_range": 50000,
+            "jammer_azimuth_deg": 45,
+            "skin_calibration_power_offset": 0,
+            "skin_rcs": -20,
+            "skin_range": 100000,
+            "skin_azimuth_deg": 0
+        },
+        "bandpassfilter": {
+            "frequency": 3025000000,
+            "bandwidth": 15000000
+        },
+		"windowfilter": {
+            "type": "MovingAverage",
+            "length": 3
+        }
+    },
+    "ph2_settings": {
+        "process": "MatchedFilter",
+        "num_range_bins": 1000,
+        "scan_azimuth_offset": 0
+    }
+}
