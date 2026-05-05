@@ -21,7 +21,7 @@
             "range_delay": true,
             "antenna_effects": true,
             "skin_return": true,
-            "signal_plotting": false
+            "signal_plotting": true
         },
         "pulse_detection": {
             "trigger_level_dBm": -30.0
