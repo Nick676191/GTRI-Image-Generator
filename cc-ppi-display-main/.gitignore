@@ -13,8 +13,6 @@ iq_analysis_tools/test-data
 output/
 */output_adv/
 output_adv/
-*/example-data/
-example-data/
 
 #any csv files generated as test data
 *.csv

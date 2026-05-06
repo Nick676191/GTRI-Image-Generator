@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xcom_header header_version="1.0" name="Filename1">
+    <device type="IQC91000A" />
+    <captures>
+        <capture center_frequency="1500000000" acq_scale_factor="4.6566E-010" acquisition_bandwidth="160000000" sample_rate="200000000" />
+    </captures>
+    <data_files>
+        <data data_encoding="int16" samples="10000000" />
+    </data_files>
+    <marker_files>
+        <marker name="File1.xmrk" />
+    </marker_files>
+    <comments></comments>
+</xcom_header>

@@ -1,0 +1,7 @@
+Frequency, 1.5 GHz
+Amplitude, -10 dBm
+PW, 250 us
+PRI, 1000 us
+FM Deviation, 4 MHz
+FM Rate, 100 Hz
+FM Type, Triangle
