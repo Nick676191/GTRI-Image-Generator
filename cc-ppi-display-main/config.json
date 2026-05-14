@@ -3,8 +3,8 @@
     "scenario_name": "testing",
     "log_level": "INFO",
     "files": {
-        "radar_iq": "example-data/s1_pulsed_with_fm.xdat",
-        "jammer_iq": "example-data/s1_pulsed_with_fm.xdat",
+        "radar_iq": "example-data/10MHzSweep_Large-05-14-26-11h17m58s838.iq",
+        "jammer_iq": "example-data/10MHzSweep_Large-05-14-26-11h17m58s838.iq",
         "block_size_samples": 1000000,
         "blocks_to_read": 0,
         "block_delay": 0,
@@ -17,7 +17,7 @@
         "actions": {
             "bandpassfilter": false,
 			"windowfilter": false,
-            "range_loss": true,
+            "range_loss": false,
             "range_delay": true,
             "antenna_effects": true,
             "skin_return": true,
