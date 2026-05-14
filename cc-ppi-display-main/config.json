@@ -24,7 +24,7 @@
             "signal_plotting": true
         },
         "pulse_detection": {
-            "trigger_level_dBm": -30.0
+            "trigger_level_dBm": -15.0
         },
         "radar": {
             "antenna_azimuth_calibration_offset": 0,
