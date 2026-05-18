@@ -18,9 +18,33 @@ def perform_matched_filter_radar_processing(config):
     outputfile = Path.joinpath(Path(files["output_folder"]), Path(files["output_returns"]))
 
     block_metadata = file_handling.get_blocks(tx_hdf5)
+
+    # Find the first block that has 'sample_frequency(hz)' written
+    sample_freq = None
+    for block in block_metadata:
+        block_key = block[0]
+        if "sample_frequency(hz)" in tx_hdf5[block_key].attrs:
+            sample_freq = tx_hdf5[block_key].attrs["sample_frequency(hz)"]
+            logging.info(f"Found sample_frequency(hz) in block {block_key}")
+            break
     
-    max_pri_block_0 = rx_hdf5[block_metadata[0][0]].attrs["max pri(us)"] / 1e6
-    sample_freq = file_handling.get_sample_freq(tx_hdf5)
+    if sample_freq is None:
+        logging.error("No block found with 'sample_frequency(hz)' attribute. Can't proceed")
+        return
+    
+    max_pri_block_0 = None
+    for block in block_metadata:
+        block_key = block[0]
+        if "max pri(us)" in rx_hdf5[block_key].attrs:
+            max_pri_block_0 = rx_hdf5[block_key].attrs["max_pri(us)"] / 1e6
+            logging.info(f"Found 'max pri(us)' in block: {block_key}")
+            break
+    
+    if max_pri_block_0 is None:
+        logging.warning("No block found with 'max pri(us)'. Falling back to 'max_dwell_length_us'.")
+        max_pri_block_0 = config["ph1_settings"]["radar"]["max_dwell_length_us"]
+    
+    # sample_freq = file_handling.get_sample_freq(tx_hdf5)
     dwell_length = max_pri_block_0 * sample_freq
     num_range_bins = config["ph2_settings"]["num_range_bins"]
 
@@ -67,9 +91,13 @@ def process_azimuth(block, azimuth, dwells, az_index, tx_hdf5, rx_hdf5, config, 
     azimuth_offset = config["ph2_settings"]["scan_azimuth_offset"]
     azimuth = (azimuth + azimuth_offset) % 360
 
-    max_pri = rx_hdf5[block[0]].attrs["max pri(us)"] / 1e6
+    if "max pri(us)" in rx_hdf5[block[0]].attrs:
+        max_pri = rx_hdf5[block[0]].attrs["max pri(us)"] / 1e6
+    else:
+        logging.info("Block missing 'max pri(us). No pulses detected in this block. Skipping")
+        max_pri = config["ph1_settings"]["radar"]["max_dwell_length_us"] / 1e6
+    
     dwell_length = max_pri * sample_freq
-
     max_pw = tx_hdf5[block[0]].attrs["max coherent pw(us)"] / 1e6
     match_length = max_pw * sample_freq
 
