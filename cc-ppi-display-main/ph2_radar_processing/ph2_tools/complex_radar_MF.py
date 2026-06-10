@@ -105,10 +105,12 @@ def group_block_split_azimuths(processed_df: pd.DataFrame):
     logging.info("Fixing azimuth block breaks.")
     processed_df["keep"] = True
     for index, row in processed_df.iterrows():
+        if index == 0:   # ADDED CODE
+            continue     # ADDED CODE
         if row["Azimuth"] != processed_df["Azimuth"].iloc[index-1]:
             continue
         processed_df.iloc[index, 4:-1] = processed_df.iloc[index - 1: index+1, 4:-1].sum()
-        processed_df["keep"].iloc[index - 1] = False
+        processed_df.loc[processed_df.index[index - 1], "keep"] = False # FIXED CODE: Changed to get rid of future warning
     processed_df = processed_df[processed_df["keep"] == True].reset_index(drop=True)
     processed_df = processed_df.drop("keep", axis=1)
     return processed_df
