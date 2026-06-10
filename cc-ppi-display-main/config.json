@@ -5,8 +5,8 @@
     "files": {
         "radar_iq": "example-data/3GHz_2ms-01-15-20-12h12m23s690.iq",
         "jammer_iq": "example-data/3GHz_2ms-01-15-20-12h12m23s690.iq",
-        "block_size_samples": 5000,
-        "blocks_to_read": 10,
+        "block_size_samples": 50000,
+        "blocks_to_read": 1,
         "block_delay": 0,
 		"block_offset": 0,
         "antenna_file": "antenna_patterns/generic-40db.csv",
@@ -28,10 +28,10 @@
         },
         "radar": {
             "antenna_azimuth_calibration_offset": 0,
-            "antenna_az_block_size_deg": 3,
+            "antenna_az_block_size_deg": 360,
             "az_stare_time_us": 2000,
-            "min_dwell_length_us": 950,
-            "max_dwell_length_us": 1050
+            "min_dwell_length_us": 350,
+            "max_dwell_length_us": 450
         },
         "scenario": {
             "jammer_calibration_power_offset": 0,
